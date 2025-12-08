@@ -19,6 +19,11 @@
   gap: 10px;
 }
 
+.column-box-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .column-box h2 {
   font-size: 20px;
 }
@@ -30,4 +35,26 @@ input {
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 16px;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.button {
+  padding: 12px;
+  width: 30%;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  align-self: flex-end;
+  transition: background 0.2s ease;
+  cursor: pointer;
+}
+
+.button.delete-user {
+  background: #d9534f;
 }
