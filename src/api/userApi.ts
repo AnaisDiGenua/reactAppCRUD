@@ -34,3 +34,38 @@ export async function getUserFetch(id: number): Promise<User> {
 
   return response.json();
 }
+
+// update user Api
+export async function updateUserFetch(
+  id: number,
+  updatedData: Partial<User>
+): Promise<User> {
+  const response = await fetch(`${BASE_URL}/users/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: JSON.stringify(updatedData),
+  });
+
+  if (!response.ok) {
+    throw new Error("error on update user");
+  }
+
+  return response.json();
+}
+
+//delete user Api
+export async function deleteUserFetch(id: number): Promise<void> {
+  const response = await fetch(`${BASE_URL}/users/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("error on delete user");
+  }
+}
