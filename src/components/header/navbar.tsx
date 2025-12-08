@@ -8,6 +8,7 @@ export default function Nav() {
         <Link to="/">Home</Link>
         <a>Login</a>
         <Link to="/user-registration">Registrati</Link>
+        <Link to="/user-detail">Account</Link>
       </nav>
     </>
   );

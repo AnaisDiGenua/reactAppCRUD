@@ -36,7 +36,7 @@ export default function UserRegistration() {
 
   return (
     <div className="create-box">
-      <h2>Create New User</h2>
+      <h2>Registrati</h2>
 
       <form onSubmit={handleCreate}>
         <label htmlFor="name">Name</label>

@@ -21,3 +21,16 @@ export async function createUserFetch(newUser: Partial<User>) {
 
   return response.json();
 }
+
+//get user Api
+export async function getUserFetch(id: number): Promise<User> {
+  const response = await fetch(`${BASE_URL}/users/${id}`, {
+    headers: { Authorization: `Bearer ${TOKEN}` },
+  });
+
+  if (!response.ok) {
+    throw new Error("error on get user");
+  }
+
+  return response.json();
+}
