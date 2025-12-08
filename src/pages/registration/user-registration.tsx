@@ -24,10 +24,10 @@ export default function UserRegistration() {
     try {
       const response = await createUserFetch(newUser);
       setUser(response);
-      alert("User created");
+      alert("Utente creato");
       navigate(`/user-detail/${response.id}`);
     } catch {
-      alert("Error during registration");
+      alert("Errore durante la registrazione");
     }
   };
 
