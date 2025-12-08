@@ -15,7 +15,7 @@ export default function UserDetail() {
   const [isEditing, setIsEditing] = useState(false);
   const [localUser, setLocalUser] = useState<User | null>();
   //Context
-  const { user, setUser } = useUserContext();
+  const { user, setUser, logout } = useUserContext();
   //Navigation
   const { id } = useParams();
   const userId = Number(id);
@@ -60,7 +60,7 @@ export default function UserDetail() {
 
     try {
       await deleteUserFetch(user.id);
-      setUser(null);
+      logout();
       navigate("/");
     } catch {
       alert("Errore durante l'eliminazione");

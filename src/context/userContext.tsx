@@ -5,6 +5,7 @@ import type { User } from "../types/User";
 interface UserContextType {
   user: User | null;
   setUser: (u: User | null) => void;
+  logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | null>(null);
@@ -12,8 +13,12 @@ const UserContext = createContext<UserContextType | null>(null);
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
+  const logout = () => {
+    setUser(null);
+  };
+
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, logout }}>
       {children}
     </UserContext.Provider>
   );
