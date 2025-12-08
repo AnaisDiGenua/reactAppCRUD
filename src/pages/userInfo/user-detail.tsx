@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getUserFetch } from "../../api/userApi";
-import type { User } from "../../types/User";
 import UserForm from "../../components/form/userForm";
 import { useParams } from "react-router-dom";
+import { useUserContext } from "../../context/userContext";
 import "./user-detail.css";
 
 export default function UserDetail() {
   const { id } = useParams();
   const userId = Number(id);
 
-  const [user, setUser] = useState<User | null>(null);
+  const { user, setUser } = useUserContext();
 
   useEffect(() => {
     async function loadUser() {
@@ -22,7 +22,7 @@ export default function UserDetail() {
     }
 
     loadUser();
-  }, [userId]);
+  }, [userId, setUser]);
 
   if (!user) return <p>Caricamento...</p>;
 

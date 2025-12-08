@@ -3,6 +3,7 @@ import type { User } from "../../types/User";
 import { createUserFetch } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
 import UserForm from "../../components/form/userForm";
+import { useUserContext } from "../../context/userContext";
 import "./user-registration.css";
 
 export default function UserRegistration() {
@@ -13,6 +14,7 @@ export default function UserRegistration() {
     gender: "",
     status: "",
   });
+  const { setUser } = useUserContext();
 
   const handleFieldChange = (field: string, value: string) => {
     setNewUser((prev) => ({ ...prev, [field]: value }));
@@ -21,7 +23,7 @@ export default function UserRegistration() {
   const handleCreate = async () => {
     try {
       const response = await createUserFetch(newUser);
-
+      setUser(response);
       alert("User created");
       navigate(`/user-detail/${response.id}`);
     } catch {
