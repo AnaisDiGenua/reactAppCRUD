@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { User } from "../types/User";
 
 interface UserContextType {
@@ -11,7 +11,23 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | null>(null);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const sessionUser = localStorage.getItem("user");
+    if (!sessionUser) {
+      return null;
+    } else {
+      const sessionUserParse = JSON.parse(sessionUser) as User;
+      return sessionUserParse;
+    }
+  });
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
 
   const logout = () => {
     setUser(null);

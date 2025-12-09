@@ -27,7 +27,7 @@ export default function Nav() {
           </>
         ) : (
           <>
-            <a>Login</a>
+            <Link to="/user-login">Login</Link>
             <Link to="/user-registration">Registrati</Link>
           </>
         )}
