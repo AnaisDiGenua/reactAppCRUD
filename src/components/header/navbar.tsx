@@ -14,6 +14,7 @@ export default function Nav() {
         {user ? (
           <>
             <Link to={`/user-detail/${user.id}`}>Account</Link>
+            <Link to={`/users/${user.id}/posts`}>I tuoi post</Link>
             <Link
               to="/"
               onClick={(e) => {
@@ -32,7 +33,6 @@ export default function Nav() {
           </>
         )}
       </nav>
-      ;
     </>
   );
 }
