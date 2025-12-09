@@ -22,7 +22,7 @@ export default function UserLogin() {
     try {
       const user = await getUserFetch(Number(id));
       setUser(user);
-      navigate(`/user-detail/${user.id}`);
+      navigate(`/`);
     } catch {
       setError("Utente non trovato");
     }
@@ -43,9 +43,11 @@ export default function UserLogin() {
           placeholder="Inserisci ID"
         />
 
-        <button type="submit" className="button">
-          Login
-        </button>
+        <div className="flex justify-end mt-4">
+          <button type="submit" className="button">
+            Login
+          </button>
+        </div>
 
         {error && <p className="logged-msg">{error}</p>}
       </form>
