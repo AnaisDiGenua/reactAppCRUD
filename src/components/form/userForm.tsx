@@ -6,6 +6,7 @@ interface UserFormProps {
   onSubmit?: (updatedData: Partial<User>) => void;
   readonly?: boolean;
   submitLabel?: string;
+  classButton?: string;
 }
 
 export default function UserForm({
@@ -14,6 +15,7 @@ export default function UserForm({
   onSubmit = () => {},
   readonly = false,
   submitLabel = "Save",
+  classButton,
 }: UserFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,9 +62,11 @@ export default function UserForm({
       />
 
       {!readonly && (
-        <button type="submit" className="button">
-          {submitLabel}
-        </button>
+        <div className={classButton}>
+          <button type="submit" className="button">
+            {submitLabel}
+          </button>
+        </div>
       )}
     </form>
   );

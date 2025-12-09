@@ -41,6 +41,7 @@ export default function UserRegistration() {
         onChange={handleFieldChange}
         onSubmit={handleCreate}
         submitLabel="Crea Utente"
+        classButton="flex justify-end mt-4"
       />
     </div>
   );
