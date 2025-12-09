@@ -67,12 +67,12 @@ export default function UserDetail() {
     }
   }
 
-  if (!localUser) return <p>Caricamento...</p>;
+  if (!localUser) return <div className="box">Caricamento...</div>;
 
   return (
-    <div className="main-wrapper">
-      <div className="column-box">
-        <div className="column-box-header">
+    <div>
+      <div className="box">
+        <div className="flex justify-between">
           <h2>Dati Utente</h2>
 
           {!isEditing && (
@@ -81,7 +81,7 @@ export default function UserDetail() {
               onClick={() => setIsEditing(true)}
               className="button"
             >
-              Modify
+              Modifica
             </button>
           )}
         </div>
@@ -96,16 +96,16 @@ export default function UserDetail() {
         />
       </div>
 
-      <div className="column-box">
+      <div className="box flex flex-col">
         <h2>Danger zone</h2>
         <p>Una volta eliminato l'uente non si può recuperare l'account</p>
 
         <button
           type="button"
           onClick={handleDelete}
-          className="button delete-user"
+          className="button delete-user self-end"
         >
-          Delete
+          Elimina
         </button>
       </div>
     </div>
