@@ -32,7 +32,7 @@ export default function UserRegistration() {
   };
 
   return (
-    <div className="create-box">
+    <div className="box">
       <h2>Registrati</h2>
 
       <UserForm
