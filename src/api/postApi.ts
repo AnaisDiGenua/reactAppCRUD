@@ -26,7 +26,7 @@ export async function createPostFetch(newPost: Partial<Post>) {
   const response = await fetch(`${BASE_URL}/posts`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${TOKEN}`, // se serve
+      Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(newPost),
@@ -40,4 +40,45 @@ export async function createPostFetch(newPost: Partial<Post>) {
 
   const data = await response.json();
   return data;
+}
+
+//delete post
+export async function deletePostFetch(postId: number) {
+  const response = await fetch(
+    `https://gorest.co.in/public/v2/posts/${postId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Errore nell'eliminazione del post");
+  }
+}
+
+//update post
+export async function updatePostFetch(
+  postId: number,
+  payload: { title: string; body: string }
+) {
+  const response = await fetch(
+    `https://gorest.co.in/public/v2/posts/${postId}`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Errore nell'aggiornamento del post");
+  }
+
+  return response.json();
 }
