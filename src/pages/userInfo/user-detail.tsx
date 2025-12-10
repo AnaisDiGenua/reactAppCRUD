@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import {
   deleteUserFetch,
   getUserFetch,
@@ -8,12 +9,13 @@ import UserForm from "../../components/form/userForm";
 import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../../context/userContext";
 import type { User } from "../../types/User";
-import "./user-detail.css";
+import Modal from "../../components/modal/modal";
 
 export default function UserDetail() {
   //UseState
   const [isEditing, setIsEditing] = useState(false);
   const [localUser, setLocalUser] = useState<User | null>();
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   //Context
   const { user, setUser, logout } = useUserContext();
   //Navigation
@@ -45,9 +47,9 @@ export default function UserDetail() {
       setLocalUser(updated);
       setIsEditing(false);
 
-      alert("Utente aggiornato con successo");
+      toast.success("Utente aggiornato con successo");
     } catch {
-      alert("Errore durante l'aggiornamento");
+      toast.error("Errore durante l'aggiornamento");
     }
   }
 
@@ -55,15 +57,12 @@ export default function UserDetail() {
   async function handleDelete() {
     if (!user) return;
 
-    const ok = confirm("Sei sicuro di voler eliminare questo utente?");
-    if (!ok) return;
-
     try {
       await deleteUserFetch(user.id);
       logout();
       navigate("/");
     } catch {
-      alert("Errore durante l'eliminazione");
+      toast.error("Errore durante l'eliminazione");
     }
   }
 
@@ -102,11 +101,22 @@ export default function UserDetail() {
 
         <button
           type="button"
-          onClick={handleDelete}
+          onClick={() => setOpenDeleteModal(true)}
           className="button delete-user self-end"
         >
           Elimina
         </button>
+
+        <Modal
+          open={openDeleteModal}
+          title="Conferma eliminazione"
+          onClose={() => setOpenDeleteModal(false)}
+          paragraph="Sei sicuro di voler eliminare questo utente?"
+          onClickDelete={() => {
+            setOpenDeleteModal(false);
+            handleDelete();
+          }}
+        ></Modal>
       </div>
     </div>
   );

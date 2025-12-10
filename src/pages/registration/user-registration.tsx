@@ -4,6 +4,7 @@ import { createUserFetch } from "../../api/userApi";
 import { useNavigate } from "react-router-dom";
 import UserForm from "../../components/form/userForm";
 import { useUserContext } from "../../context/userContext";
+import toast from "react-hot-toast";
 import "./user-registration.css";
 
 export default function UserRegistration() {
@@ -24,10 +25,10 @@ export default function UserRegistration() {
     try {
       const response = await createUserFetch(newUser);
       setUser(response);
-      alert("Utente creato");
+      toast.success("Utente creato con successo!");
       navigate(`/user-detail/${response.id}`);
     } catch {
-      alert("Errore durante la registrazione");
+      toast.error("Errore durante la registrazione");
     }
   };
 

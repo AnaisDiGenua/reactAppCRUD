@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/userContext";
 import "./navbar.css";
 
@@ -6,33 +6,73 @@ export default function Nav() {
   const { user, logout } = useUserContext();
   const navigate = useNavigate();
 
-  return (
-    <>
-      <nav className="navbar">
-        <Link to="/">Home</Link>
+  const baseClasses = "px-3 py-1 rounded-md";
+  const activeClasses = "bg-gray-100 text-white";
 
-        {user ? (
-          <>
-            <Link to={`/user-detail/${user.id}`}>Account</Link>
-            <Link to={`/users/${user.id}/posts`}>I tuoi post</Link>
-            <Link
-              to="/"
-              onClick={(e) => {
-                e.preventDefault();
-                logout();
-                navigate("/");
-              }}
-            >
-              Logout
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to="/user-login">Login</Link>
-            <Link to="/user-registration">Registrati</Link>
-          </>
-        )}
-      </nav>
-    </>
+  return (
+    <nav className="navbar">
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `${baseClasses} ${isActive ? activeClasses : ""}`
+        }
+      >
+        Home
+      </NavLink>
+
+      {user ? (
+        <>
+          <NavLink
+            to={`/user-detail/${user.id}`}
+            className={({ isActive }) =>
+              `${baseClasses} ${isActive ? activeClasses : ""}`
+            }
+          >
+            Account
+          </NavLink>
+
+          <NavLink
+            to={`/users/${user.id}/posts`}
+            className={({ isActive }) =>
+              `${baseClasses} ${isActive ? activeClasses : ""}`
+            }
+          >
+            I tuoi post
+          </NavLink>
+
+          <NavLink
+            to="/"
+            onClick={(e) => {
+              e.preventDefault();
+              logout();
+              navigate("/");
+            }}
+            className={baseClasses}
+          >
+            Logout
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink
+            to="/user-login"
+            className={({ isActive }) =>
+              `${baseClasses} ${isActive ? activeClasses : ""}`
+            }
+          >
+            Login
+          </NavLink>
+
+          <NavLink
+            to="/user-registration"
+            className={({ isActive }) =>
+              `${baseClasses} ${isActive ? activeClasses : ""}`
+            }
+          >
+            Registrati
+          </NavLink>
+        </>
+      )}
+    </nav>
   );
 }
