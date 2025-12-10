@@ -44,22 +44,30 @@ export default function UserForm({
       />
 
       <label htmlFor="gender">Gender</label>
-      <input
+      <select
         id="gender"
         name="gender"
         value={userData.gender || ""}
         disabled={readonly}
         onChange={(e) => onChange("gender", e.target.value)}
-      />
+      >
+        <option value="">-- Seleziona un genere --</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
 
       <label htmlFor="status">Status</label>
-      <input
+      <select
         id="status"
         name="status"
         value={userData.status || ""}
         disabled={readonly}
         onChange={(e) => onChange("status", e.target.value)}
-      />
+      >
+        <option value="">-- Seleziona lo status --</option>
+        <option value="active">Active</option>
+        <option value="inactive">Inactive</option>
+      </select>
 
       {!readonly && (
         <div className={classButton}>
