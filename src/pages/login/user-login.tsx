@@ -5,22 +5,23 @@ import { useUserContext } from "../../context/userContext";
 import "./user-login.css";
 
 export default function UserLogin() {
+  //useState
   const [id, setId] = useState("");
   const [error, setError] = useState("");
+  //context
   const { setUser } = useUserContext();
+  //navigation
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
     if (!id) {
       setError("Inserisci un ID utente");
       return;
     }
-
     try {
       const user = await getUserFetch(Number(id));
+      setError("");
       setUser(user);
       navigate(`/`);
     } catch {

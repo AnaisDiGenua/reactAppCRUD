@@ -8,14 +8,17 @@ import toast from "react-hot-toast";
 import "./user-registration.css";
 
 export default function UserRegistration() {
-  const navigate = useNavigate();
+  //useState
   const [newUser, setNewUser] = useState<Partial<User>>({
     name: "",
     email: "",
     gender: "",
     status: "",
   });
+  //context
   const { setUser } = useUserContext();
+  //navigation
+  const navigate = useNavigate();
 
   const handleFieldChange = (field: string, value: string) => {
     setNewUser((prev) => ({ ...prev, [field]: value }));

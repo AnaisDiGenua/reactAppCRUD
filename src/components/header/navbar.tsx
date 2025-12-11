@@ -3,7 +3,9 @@ import { useUserContext } from "../../context/userContext";
 import "./navbar.css";
 
 export default function Nav() {
+  //context
   const { user, logout } = useUserContext();
+  //navigation
   const navigate = useNavigate();
 
   const baseClasses = "px-3 py-1 rounded-md";
